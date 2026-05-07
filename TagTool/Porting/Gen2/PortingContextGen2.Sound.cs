@@ -200,7 +200,7 @@ namespace TagTool.Porting.Gen2
 
                     var permutation = new Permutation();
                     permutation.ImportName = ConvertStringId(ugh.ImportNames[gen2Permutation.Name].Name);
-                    permutation.SkipFraction = gen2Permutation.EncodedSkipFraction / 32767.0f;
+                    permutation.SkipFraction = (gen2Permutation.EncodedSkipFraction / 32767.0f) * 0.5f;
                     permutation.Gain = gen2Permutation.EncodedGain * 127.0f;  // need proper sbyte decoding
                     permutation.PermutationChunks = new List<PermutationChunk>();
                     permutation.RawInfoIndex = (short)i;

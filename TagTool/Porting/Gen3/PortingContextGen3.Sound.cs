@@ -91,7 +91,7 @@ namespace TagTool.Porting.Gen3
 
                 for (int permutationIndex = 0; permutationIndex < permutationCount; permutationIndex++)
                 {
-                    Permutation blamPermutation = BlamSoundGestalt.GetPermutation(pitchRange, permutationIndex, BlamCache.Platform);
+                    Permutation blamPermutation = BlamSoundGestalt.GetPermutation(blamPitchRange, permutationIndex, BlamCache.Platform);
 
                     // Convert the audio
                     BlamSound convertedAudio = ConvertAudio(sound, blamTagName, targetFormat, pitchRangeIndex, permutationIndex, blamPermutation);
@@ -101,7 +101,7 @@ namespace TagTool.Porting.Gen3
                     var permutation = new Permutation();
                     result.PostConversionOperations.Add(() => permutation.ImportName = ConvertStringId(BlamSoundGestalt.ImportNames[blamPermutation.ImportNameIndex].Name));
                     permutation.SampleCount = convertedAudio.SampleCount;
-                    permutation.SkipFraction = blamPermutation.EncodedSkipFraction / 32767.0f;
+                    permutation.SkipFraction = (blamPermutation.EncodedSkipFraction / 32767.0f) * 0.5f;
                     permutation.Gain = (float)blamPermutation.EncodedGain;
                     permutation.RawInfoIndex = blamPermutation.RawInfoIndex;
 
