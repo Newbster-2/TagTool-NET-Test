@@ -107,8 +107,9 @@ namespace TagTool.Porting.Gen3
 
                     // Create the chunk (MS23 uses only a single chunk)
                     var firstBlamChunk = BlamSoundGestalt.GetPermutationChunk(blamPermutation, 0);
-                    var lastBlamChunk = BlamSoundGestalt.GetPermutationChunk(blamPermutation, permutationCount - 1);
-                    var newChunk = new PermutationChunk(currentSoundDataOffset, convertedAudio.Data.Length, firstBlamChunk.LastSample, lastBlamChunk.LastSample);
+                    var lastBlamChunk = BlamSoundGestalt.GetPermutationChunk(blamPermutation, blamPermutation.PermutationChunkCount - 1);
+                    var newChunk = new PermutationChunk(currentSoundDataOffset, convertedAudio.Data.Length, firstBlamChunk.FirstSample, lastBlamChunk.LastSample);
+                    permutation.FirstSample = firstBlamChunk.FirstSample;
                     permutation.PermutationChunks = [newChunk];
                     pitchRange.Permutations.Add(permutation);
 
